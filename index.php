@@ -1,3 +1,4 @@
+
 <!Doctype html>
 <html>
 <head>
@@ -14,9 +15,10 @@ include_once('header.php');
 include('navigation.php');
 ?>
 <main>
+
     <?php
     if(isSet($_GET["page"])){
-        include('content/'.$_GET["page"].".php");
+        include('content/'.$_GET["page"].'.php');
     } else {
         include('content/pealeht.php');
     }

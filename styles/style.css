@@ -1,28 +1,38 @@
+
+html {
+    min-height: 100%;
+}
+
 div.container {
-    width: 100%;
     margin: 0px;
     border: 1px solid orange;
     line-height: 150%;
 }
 
 header, footer {
-    padding: 0.5em;
+    padding-bottom: 1em;
+    padding-top: 1em;
     color: whitesmoke;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+
     background-color: orangered;
-    clear: left;
+    clear: both;
+
+}
+footer {
+    bottom:0px;
+    position: absolute;
+    margin-right: 10px;
 }
 
 header h1 {
-    padding: 0;
-    margin: 0;
+    
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+
 }
 footer h3 {
-    padding: 0;
-    margin: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
@@ -37,33 +47,50 @@ footer h3 {
     background-color: lightyellow;
     padding-left: 2px; */
 .sidenav {
-    float: left;
-    width: 160px;
     margin: 0;
-    padding: 1em;
-}
+    float: left;
+} 
 .sidenav ul {
     list-style-type: none;
-    float: left;
+    position: fixed;
+    min-height: 100%;
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    overflow: hidden;
+    background-color: lightblue;
 }
-.sidenav a {
+.sidenav li {
+    font-weight: 200;
+}
+.sidenav li a {
+   
     display: inline-block;
-    padding: 10px 16px;
+    padding-top: 1em;
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-bottom: 1em;
+    color: black;
+    text-decoration: none;
     text-align: center;
-
+}
+.sidenav li a:hover {
+    background-color: aqua;
+    text-decoration: underline;
+    width: 100%;
 }
 main {
-    margin-left: 190px;
+    margin-left: 200px;
     border-left: 1px solid lightblue;
-    background-color: lightyellow;
-    padding: 1em;
+    background-color: greenyellow;
+    padding-left: 5em;
+    padding-top: 5em;
+    padding-bottom: 17em;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    background-size: 100%;
     /*
     margin-left: 160px;
     */
@@ -79,7 +106,6 @@ nav ul {
     font-weight: 300;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-
 }
 
 nav li {
@@ -90,16 +116,22 @@ nav li a {
     display: inline-block;
     color: black;
     text-align: center;
-    padding: 14px 16px;
+    /*padding: 14px 16px; */
+    padding: 1em;
     text-decoration: none;
 }
 
 nav li a:hover {
     background-color: aliceblue;
-    text-underline-style: double;
     text-decoration: underline;
 }
+@supports (background-blend-mode : screen)
+{
+    main {
+        background-color: darkgray; 
+        background-image: url('../images/1024px-Left_side_of_Flying_Pigeon.jpg');
+        background-blend-mode: screen;    
+    }
 
-button {
 
 }

@@ -1,6 +1,6 @@
 <?php
 require_once("konf.php");
-if(isSet($_REQUEST["sisestusnupp"])){
+if(isSet($_REQUEST['sisestusnupp'])){
     $kask=$yhendus->prepare(
         "INSERT INTO jalgrattaeksam(eesnimi, perekonnanimi) VALUES (?, ?)");
     $kask->bind_param("ss", $_REQUEST["eesnimi"], $_REQUEST["perekonnanimi"]);
@@ -22,7 +22,7 @@ if(isSet($_REQUEST["lisatudeesnimi"])){
     echo "Lisati $_REQUEST[lisatudeesnimi]";
 }
 ?>
-<form action="?">
+<form method= "post" action="index.php?page=registreerimine">
     <dl>
         <dt>Eesnimi:</dt>
         <dd><input type="text" name="eesnimi" /></dd>
