@@ -1,45 +1,46 @@
 <?php
-require_once("konf.php");
-if(!empty($_REQUEST["korras_id"])){
-    $kask=$yhendus->prepare(
-        "UPDATE jalgrattaeksam SET ringtee=1 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["korras_id"]);
-    $kask->execute();
+require_once("konf.php"); 
+if(!empty($_REQUEST["jah"])){
+  $kask=$yhendus->prepare(
+    "UPDATE jalgrattaeksam SET ringtee=1 WHERE id=?");
+  $kask->bind_param("i", $_REQUEST["id"]);
+  $kask->execute();
 }
-if(!empty($_REQUEST["vigane_id"])){
-    $kask=$yhendus->prepare(
-        "UPDATE jalgrattaeksam SET ringtee=2 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["vigane_id"]);
-    $kask->execute();
+if(!empty($_REQUEST["ei"])){
+  $kask=$yhendus->prepare(
+    "UPDATE jalgrattaeksam SET ringtee=2 WHERE id=?");
+  $kask->bind_param("i", $_REQUEST["id"]);
+  $kask->execute();
 }
 $kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi 
-     FROM jalgrattaeksam WHERE teooriatulemus>=9 AND ringtee=-1");
+   FROM jalgrattaeksam WHERE teooriatulemus>=9 AND ringtee=-1");
 $kask->bind_result($id, $eesnimi, $perekonnanimi);
 $kask->execute();
+
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Ringtee</title>
-</head>
-<body>
+
 <h1>Ringtee</h1>
+
 <table>
+  <tr>
+    <td>eesnimi</td>
+	  <td>perekonnanimi</td>
+    <td>seis</td>
+  </tr>
     <?php
     while($kask->fetch()){
         echo "
-		    <tr>
+        <tr>
 			  <td>$eesnimi</td>
-			  <td>$perekonnanimi</td>
-			  <td>
-			    <a href='?korras_id=$id'>Korras</a>
-			    <a href='?vigane_id=$id'>Ebaõnnestunud</a>
-			  </td>
-			</tr>
-		  ";
+              <td>$perekonnanimi</td>
+              <td><form action='?page=ringtee' method= 'post'>
+              <input type='hidden' name='id' value='$id' />
+                    <input type='submit' name='jah' value='Sooritas'/>
+                    <input type='submit' name= 'ei' value='Ei sooritanud'/>
+              </form>
+              </td>
+			</tr>";
     }
     ?>
 </table>
-</body>
-</html>
 

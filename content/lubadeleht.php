@@ -1,9 +1,9 @@
 <?php
 require_once("konf.php");
-if(!empty($_REQUEST["vormistamine_id"])){
+if(!empty($_REQUEST["vormistan"])){
 $kask=$yhendus->prepare(
 "UPDATE jalgrattaeksam SET luba=1 WHERE id=?");
-$kask->bind_param("i", $_REQUEST["vormistamine_id"]);
+$kask->bind_param("i", $_REQUEST["id"]);
 $kask->execute();
 }
 $kask=$yhendus->prepare(
@@ -20,11 +20,6 @@ if($nr== 2){return "ebaõnnestunud";}
 return "Tundmatu number";
 }
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Lõpetamine</title>
-</head>
 <body>
 <h1>Lõpetamine</h1>
 <table>
@@ -45,7 +40,11 @@ return "Tundmatu number";
         $loalahter=".";
         if($luba==1){$loalahter="Väljastatud";}
         if($luba==-1 and $t2nav==1){
-            $loalahter="<a href='?vormistamine_id=$id'>Vormista load</a>";
+            $loalahter="
+            <form action='?page=lubadeleht' method= 'post'>
+            <input type='hidden' name='id' value='$id' />
+            <input type='submit' name='vormistan' value='Vormista'/>
+            </form>";
         }
         echo "
 		     <tr>
@@ -62,6 +61,5 @@ return "Tundmatu number";
     ?>
 </table>
 </body>
-</html>
 
 

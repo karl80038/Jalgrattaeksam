@@ -11,24 +11,25 @@ $kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi
 $kask->bind_result($id, $eesnimi, $perekonnanimi);
 $kask->execute();
 ?>
-<!doctype html>
-<html>
-<head>
     <title>Teooriaeksam</title>
     <h1>Teooriaeksami hindamine</h1>
     <br>
     Kui punktide arv on 9 või suurem, siis lubatakse järgmisele eksamile.
     <br><br>
-</head>
 <body>
 <table>
+    <tr>
+    <td>eesnimi</td>
+	<td>perekonnanimi</td>
+    <td>punktid</td>
+    </tr>
     <?php
     while($kask->fetch()){
         echo "
 		    <tr>
 			  <td>$eesnimi</td>
 			  <td>$perekonnanimi</td>
-			  <td><form action=''>
+			  <td><form action='?page=teooriaeksam' method= 'post'>
 			         <input type='hidden' name='id' value='$id' />
 					 <input type='text' name='teooriatulemus' />
 					 <input type='submit' value='Sisesta tulemus' />

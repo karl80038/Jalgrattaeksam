@@ -1,15 +1,15 @@
 <?php
 require_once("konf.php");
-if(!empty($_REQUEST["korras_id"])){
+if(!empty($_REQUEST["jah"])){
     $kask=$yhendus->prepare(
         "UPDATE jalgrattaeksam SET slaalom=1 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["korras_id"]);
+    $kask->bind_param("i", $_REQUEST["id"]);
     $kask->execute();
 }
-if(!empty($_REQUEST["vigane_id"])){
+if(!empty($_REQUEST["ei"])){
     $kask=$yhendus->prepare(
         "UPDATE jalgrattaeksam SET slaalom=2 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["vigane_id"]);
+    $kask->bind_param("i", $_REQUEST["id"]);
     $kask->execute();
 }
 $kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi 
@@ -17,23 +17,28 @@ $kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi
 $kask->bind_result($id, $eesnimi, $perekonnanimi);
 $kask->execute();
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Slaalom</title>
-</head>
+    <title>Teooriaeksam</title>
+    <h1>Slaalom</h1>
+
+ 
 <body>
-<h1>Slaalom</h1>
 <table>
+    <tr>
+    <td>eesnimi</td>
+	<td>perekonnanimi</td>
+    <td>seis</td>
+    </tr>
     <?php
     while($kask->fetch()){
         echo "
 		    <tr>
 			  <td>$eesnimi</td>
 			  <td>$perekonnanimi</td>
-			  <td>
-			    <a href='?korras_id=$id'>Korras</a>
-			    <a href='?vigane_id=$id'>Ebaõnnestunud</a>
+			  <td><form action='?page=slaalom' method= 'post'>
+			         <input type='hidden' name='id' value='$id' />
+                     <input type='submit' name='jah' value='Sooritas'/>
+                     <input type='submit' name= 'ei' value='Ei sooritanud'/>
+			      </form>
 			  </td>
 			</tr>
 		  ";
@@ -41,4 +46,3 @@ $kask->execute();
     ?>
 </table>
 </body>
-</html>

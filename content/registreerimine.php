@@ -1,28 +1,24 @@
 <?php
 require_once("konf.php");
-if(isSet($_REQUEST['sisestusnupp'])){
+if(isSet($_REQUEST["sisestusnupp"])){
     $kask=$yhendus->prepare(
         "INSERT INTO jalgrattaeksam(eesnimi, perekonnanimi) VALUES (?, ?)");
     $kask->bind_param("ss", $_REQUEST["eesnimi"], $_REQUEST["perekonnanimi"]);
     $kask->execute();
     $yhendus->close();
-    header("Location: $_SERVER[PHP_SELF]?lisatudeesnimi=$_REQUEST[eesnimi]");
-    exit();
+    //header("Location: $_SERVER[PHP_SELF]?lisatudeesnimi=$_REQUEST[eesnimi]");
+    //exit();
+    $lisatudeesnimi=$_REQUEST["eesnimi"];
 }
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Kasutaja registreerimine</title>
-</head>
-<body>
+
 <h1>Registreerimine</h1>
 <?php
-if(isSet($_REQUEST["lisatudeesnimi"])){
-    echo "Lisati $_REQUEST[lisatudeesnimi]";
+if(isSet($lisatudeesnimi)){
+    echo "<div id='success'>Lisati $lisatudeesnimi</div>";
 }
 ?>
-<form method= "post" action="index.php?page=registreerimine">
+<form action="?page=registreerimine" method= "post">
     <dl>
         <dt>Eesnimi:</dt>
         <dd><input type="text" name="eesnimi" /></dd>
@@ -32,4 +28,3 @@ if(isSet($_REQUEST["lisatudeesnimi"])){
     </dl>
 </form>
 </body>
-</html>

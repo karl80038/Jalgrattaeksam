@@ -14,6 +14,8 @@ include_once('header.php');
 <?php
 include('navigation.php');
 ?>
+<?php
+?>
 <main>
 
     <?php
